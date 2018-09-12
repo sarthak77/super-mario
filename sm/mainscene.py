@@ -105,6 +105,7 @@ class mainscene_board:
         os.system('clear')
         print(str(self.__grid[:,0+index:100+index:1]).replace(' ','').replace('.','').replace('[','').replace(']','').replace('b','').replace('\'\'',""))
         print()
+        print(a1,a2)
         global a
         print("TIME->",int(time.time()-a))
         print("LIFE->",life,"BULLET->",bullet)#bullet 1 means yes
@@ -200,20 +201,20 @@ class mainscene_board:
    
     #finds enemies on the board
     def searchenemy(self,i):
-        j = i+100 
-        if self.__grid[34,j]==b'Q':
-            if self.__grid[34,j+1]==b'Q':
-                global a2
-                try:
-                    a2.index(j)
-                except:
-                    a2.append(j)
-            elif self.__grid[34,j-1]!=b'Q':
-                global a1
-                try:
-                    a1.index(j)
-                except:
-                    a1.append(j)
+        for j in range(80+i,100+i,1):#max=100+i and difference = increment in i
+            if self.__grid[34,j]==b'Q':
+                if self.__grid[34,j+1]==b'Q':
+                    global a2
+                    try:
+                        a2.index(j)
+                    except:
+                        a2.append(j)
+                elif self.__grid[34,j-1]!=b'Q':
+                    global a1
+                    try:
+                        a1.index(j)
+                    except:
+                        a1.append(j)
 
         return(a1,a2)
 

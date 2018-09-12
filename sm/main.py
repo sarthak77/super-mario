@@ -19,6 +19,9 @@ cjump=10#for surprise coin
 bullet=0
 x=[]
 y=[]
+#to control enemy loop
+loop=0
+loop2=0
 #9 enemies
 enemy1=np.chararray((5,4))
 enemy1[:]="-"
@@ -141,6 +144,8 @@ class screen(object):
                 global bullet
                 global x
                 global y
+                global loop
+                global loop2
 
                 #if won
                 if mariopresent==[33,609]:
@@ -193,11 +198,11 @@ class screen(object):
                         for b in range(0,11*direction,direction):
                             g=self.__board.getgrid(mariopresent[0]+1,mariopresent[1]+3*direction+b)#storing next cell
                             self.__board.fire1(mariopresent[0]+1,mariopresent[1]+3*direction+b)
-                            os.system('clear')
+                            #os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
                             self.__board.fire2(mariopresent[0]+1,mariopresent[1]+3*direction+b,g)
                             time.sleep(.03)
-                            os.system('clear')
+                            #os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                             #check if enemy dead or not
@@ -507,13 +512,14 @@ class screen(object):
                 if 1:
                     
                     #FOR SCREEN 
-                    if mariopresent[1]>(i+30):#position of mario at which screen moves
-                        i+=1
-                        time.sleep(0.03)
+                    if mariopresent[1]>(i+50):#position of mario at which screen moves
+                        i+=20
+                        #time.sleep(0.03)
                         os.system('clear')
                         self.__board.printboard(i,mariopresent[1],life,score,bullet)
                        
-                    #array of enemies                    
+                    #array of enemies 
+                    #enemies completely governed by these arrays                   
                     x,y=self.__board.searchenemy(i)
 
 
@@ -526,54 +532,58 @@ class screen(object):
                     if marioprev[3]=='I':
                         bullet=1
 
-                    #FOR ENEMY1                    
-                    if len(x)!=0 and i+100>x[len(x)-1]>i:
-                        for count in range(len(x)):
-                            if mariopresent[1]<x[count]:
-                                c1=checkmv(self.__board.getgrid(35,x[count]-3))
+                    if time.time()-loop>1:
+                        loop=time.time()
+                        #FOR ENEMY1                    
+                        if len(x)!=0 and i+100>x[len(x)-1]>i:
+                            for count in range(len(x)):
+                                if mariopresent[1]<x[count]:
+                                    c1=checkmv(self.__board.getgrid(35,x[count]-3))
+                                    if c1:
+                                        self.__board.updateenemy1b(x[count],enemy1[count,:].decode())
+                                        #updating prev array
+                                        enemy1[count,3]=enemy1[count,1]
+                                        enemy1[count,2]=self.__board.getgrid(35,x[count]-2)
+                                        enemy1[count,1]=self.__board.getgrid(35,x[count]-3)
+                                        enemy1[count,0]=self.__board.getgrid(34,x[count]-2)
+                                        x[count]-=2
+                                        self.__board.updateenemy1(34,x[count])
+                                else:
+                                    c1=checkmv(self.__board.getgrid(35,x[count]+3))
+                                    if c1:
+                                        self.__board.updateenemy1f(x[count],enemy1[count,:].decode())
+                                        #updating prev array
+                                        enemy1[count,0]=self.__board.getgrid(34,x[count]+2)
+                                        enemy1[count,1]=enemy1[count,3]
+                                        enemy1[count,2]=self.__board.getgrid(35,x[count]+2)
+                                        enemy1[count,3]=self.__board.getgrid(35,x[count]+3)
+                                        x[count]+=2
+                                        self.__board.updateenemy1(34,x[count])
+                            time.sleep(0.1)
+                            os.system('clear')
+                            self.__board.printboard(i,mariopresent[1],life,score,bullet)
+                    
+                    if time.time()-loop2>.5:
+                        loop2=time.time()
+                        #FOR ENEMY2                    
+                        if len(y)!=0 and i+100>y[len(y)-1]>i:
+                            for count in range(len(y)):
+                                c1=checkmv(self.__board.getgrid(35,y[count]-2))
                                 if c1:
-                                    self.__board.updateenemy1b(x[count],enemy1[count,:].decode())
-                                    #updating prev array
-                                    enemy1[count,3]=enemy1[count,1]
-                                    enemy1[count,2]=self.__board.getgrid(35,x[count]-2)
-                                    enemy1[count,1]=self.__board.getgrid(35,x[count]-3)
-                                    enemy1[count,0]=self.__board.getgrid(34,x[count]-2)
-                                    x[count]-=2
-                                    self.__board.updateenemy1(34,x[count])
-                            else:
-                                c1=checkmv(self.__board.getgrid(35,x[count]+3))
-                                if c1:
-                                    self.__board.updateenemy1f(x[count],enemy1[count,:].decode())
-                                    #updating prev array
-                                    enemy1[count,0]=self.__board.getgrid(34,x[count]+2)
-                                    enemy1[count,1]=enemy1[count,3]
-                                    enemy1[count,2]=self.__board.getgrid(35,x[count]+2)
-                                    enemy1[count,3]=self.__board.getgrid(35,x[count]+3)
-                                    x[count]+=2
-                                    self.__board.updateenemy1(34,x[count])
-                        time.sleep(0.1)
-                        os.system('clear')
-                        self.__board.printboard(i,mariopresent[1],life,score,bullet)
-                       
-                    #FOR ENEMY2                    
-                    if len(y)!=0 and i+100>y[len(y)-1]>i:
-                        for count in range(len(y)):
-                            c1=checkmv(self.__board.getgrid(35,y[count]-2))
-                            if c1:
-                                self.__board.updateenemy2b(y[count],enemy2[count,:].decode())
+                                    self.__board.updateenemy2b(y[count],enemy2[count,:].decode())
 
-                                #updating prev array
-                                enemy2[count,4]=enemy2[count,2]
-                                enemy2[count,3]=self.__board.getgrid(35,y[count])
-                                enemy2[count,2]=self.__board.getgrid(35,y[count]-1)
-                                enemy2[count,1]=self.__board.getgrid(34,y[count]-1)
-                                enemy2[count,0]=self.__board.getgrid(34,y[count]-2)
-                                y[count]-=2
-                                self.__board.updateenemy2(34,y[count])
-                        #faster
-                        time.sleep(0.01)
-                        os.system('clear')
-                        self.__board.printboard(i,mariopresent[1],life,score,bullet)
+                                    #updating prev array
+                                    enemy2[count,4]=enemy2[count,2]
+                                    enemy2[count,3]=self.__board.getgrid(35,y[count])
+                                    enemy2[count,2]=self.__board.getgrid(35,y[count]-1)
+                                    enemy2[count,1]=self.__board.getgrid(34,y[count]-1)
+                                    enemy2[count,0]=self.__board.getgrid(34,y[count]-2)
+                                    y[count]-=2
+                                    self.__board.updateenemy2(34,y[count])
+                            #faster
+                            time.sleep(0.01)
+                            os.system('clear')
+                            self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                     #if all lives used up
                     if life<=0:
