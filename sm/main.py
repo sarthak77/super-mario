@@ -559,7 +559,7 @@ class screen(object):
                                         enemy1[count,3]=self.__board.getgrid(35,x[count]+3)
                                         x[count]+=2
                                         self.__board.updateenemy1(34,x[count])
-                            time.sleep(0.1)
+                            time.sleep(0.03)
                             os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
                     
