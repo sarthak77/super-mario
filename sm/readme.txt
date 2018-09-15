@@ -1,6 +1,5 @@
 shows prev dead location
 shows location where mario just about to die
-after dead enemy appear suddenly
 if life < 3 shows coordinates of enemies in advance
 
 

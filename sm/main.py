@@ -121,6 +121,7 @@ class screen(object):
         #creating object
         self.__board=mainscene_board()
 
+
     #main function
     def run(self):
         #initial values
@@ -152,6 +153,7 @@ class screen(object):
                     #spawn fireworks 
                     for f in range(580,650,10):
                         self.__board.addfireworks(10,f)
+                        os.system('clear')
                         self.__board.printboard(i,mariopresent[1],life,score,bullet)
                         #print(f)
                         time.sleep(.5)
@@ -199,11 +201,11 @@ class screen(object):
                         for b in range(0,11*direction,direction):
                             g=self.__board.getgrid(mariopresent[0]+1,mariopresent[1]+3*direction+b)#storing next cell
                             self.__board.fire1(mariopresent[0]+1,mariopresent[1]+3*direction+b)
-                            #os.system('clear')
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
                             self.__board.fire2(mariopresent[0]+1,mariopresent[1]+3*direction+b,g)
                             time.sleep(.03)
-                            #os.system('clear')
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                             #check if enemy dead or not
@@ -246,6 +248,7 @@ class screen(object):
                             life+=c2
                             self.__board.updatemario(mariopresent[0],mariopresent[1])
                             previnp="d"
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                             #if falls in river
@@ -257,6 +260,7 @@ class screen(object):
                                 time.sleep(1)
                                 mariopresent=[33,7]
                                 i=0
+                                os.system('clear')
                                 self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
 
@@ -287,6 +291,7 @@ class screen(object):
                             life+=c2
                             self.__board.updatemario(mariopresent[0],mariopresent[1])
                             previnp="a"
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                             #if dead
@@ -298,6 +303,7 @@ class screen(object):
                                 time.sleep(1)
                                 mariopresent=[33,7]
                                 i=0
+                                os.system('clear')
                                 self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
 
@@ -333,6 +339,7 @@ class screen(object):
                             mariopresent=[mariopresent[0]-speed,mariopresent[1]]
                             self.__board.updatemario(mariopresent[0],mariopresent[1])
                             timer-=1
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                         #moving right
@@ -357,6 +364,7 @@ class screen(object):
                                 mariopresent=[mariopresent[0],mariopresent[1]+speed]
                                 self.__board.updatemario(mariopresent[0],mariopresent[1])
                                 timer-=1
+                                os.system('clear')
                                 self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                         #moving left
@@ -382,6 +390,7 @@ class screen(object):
                                 self.__board.updatemario(mariopresent[0],mariopresent[1])
 
                                 timer-=1
+                                os.system('clear')
                                 self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                         #moving down
@@ -419,6 +428,7 @@ class screen(object):
                             mariopresent=[mariopresent[0]+speed,mariopresent[1]]
                             self.__board.updatemario(mariopresent[0],mariopresent[1])
                             timer-=1
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                         previnp="w"
@@ -461,14 +471,14 @@ class screen(object):
                             if self.__board.jumpupc(mariopresent[0]-1,mariopresent[1])==11:
                                 p=1
                             #time.sleep(0.1)
-                            #os.system('clear')
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
                             time.sleep(0.1)
                             self.__board.jumpdownc(mariopresent[0]-1,mariopresent[1])
                             if p==1:
                                 self.__board.powerup(mariopresent[0]-1,mariopresent[1])
                             #time.sleep(0.1)
-                            #os.system('clear')
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
                        
                         """
@@ -506,6 +516,7 @@ class screen(object):
                             time.sleep(1)
                             mariopresent=[33,7]
                             i=0
+                            os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                         
@@ -609,6 +620,7 @@ class screen(object):
                                 time.sleep(1)
                                 mariopresent=[33,7]
                                 i=0
+                                os.system('clear')
                                 self.__board.printboard(i,mariopresent[1],life,score,bullet)
                                 self.__board.clean(clean[0],clean[1])
 
@@ -626,6 +638,7 @@ class screen(object):
                                 time.sleep(1)
                                 mariopresent=[33,7]
                                 i=0
+                                os.system('clear')
                                 self.__board.printboard(i,mariopresent[1],life,score,bullet)
                                 self.__board.clean(clean[0],clean[1])
 
@@ -640,6 +653,7 @@ class screen(object):
                         time.sleep(1)
                         mariopresent=[33,7]
                         i=0
+                        os.system('clear')
                         self.__board.printboard(i,mariopresent[1],life,score,bullet)
                         self.__board.clean(clean[0],clean[1])
 
