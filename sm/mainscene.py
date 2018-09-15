@@ -3,7 +3,8 @@
 
 import numpy as np
 import board
-import os,time
+import os,time,sys
+import color
 
 #for maintaining timer
 from main import a
@@ -103,7 +104,14 @@ class mainscene_board:
     #for printing the game scene
     def printboard(self,index,coor,life,score,bullet):
         os.system('clear')
-        print(str(self.__grid[:,0+index:100+index:1]).replace(' ','').replace('.','').replace('[','').replace(']','').replace('b','').replace('\'\'',""))
+
+        sys.stdout.flush()
+        #print(str(self.__grid[:,0+index:100+index:1]).replace(' ','').replace('.','').replace('[','').replace(']','').replace('b','').replace('\'\'',""))
+        for row in range(40):
+            for column in range(0+index,100+index,1):
+                sys.stdout.write(color.getcolor(self.__grid[row,column].decode()))
+            sys.stdout.write("\n")
+
         print()
         print(a1,a2)
         global a

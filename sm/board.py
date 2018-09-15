@@ -25,7 +25,7 @@ def addcloud(grid,x,y):
     return(grid)
 
 #adding hills
-hill="*"
+hill="/"
 def addhill(grid,x,y):
     grid[x,y]=hill
     count=1
@@ -114,7 +114,7 @@ castle="H"
 def addcastle(grid,x,y):
     grid[x:x-6:-1,y:y+20:1]=castle
     grid[x-6:x-10:-1,y+5:y+15:1]=castle
-    grid[x:x-3:-1,y+8:y+12:1]="*"
+    grid[x:x-3:-1,y+8:y+12:1]="."
     return(grid)
 
 #adding enemy1

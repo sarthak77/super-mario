@@ -156,6 +156,7 @@ class screen(object):
                         #print(f)
                         time.sleep(.5)
 
+                    time.sleep(2)
                     os.system('clear')
                     print("SCORE->",score)
                     time.sleep(1)
@@ -445,7 +446,7 @@ class screen(object):
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
                     
                     #to move down
-                    temp=["-","*"]
+                    temp=["-","/"]
                     if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1) in temp and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1) in temp:
 
                         #check for bullet power up
