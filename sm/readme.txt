@@ -1,6 +1,6 @@
 shows prev dead location
-shows location where mario just about to die
 if life < 3 shows coordinates of enemies in advance
+if dead once more enemies might come
 
 
 enemy2:
@@ -33,3 +33,7 @@ imaginary block at 75
 
 bullet:
 pass through the flower slowly to get the bullet
+once flower plucked its stem will disappear
+
+level:
+speed of enemies increases as mario progresses

@@ -69,17 +69,19 @@ class mainscene_board:
 
         #enemies
 
-        #enemy1
+        #enemy1 y=even
+
+        self.__grid=board.adde1(self.__grid,35,80)
         self.__grid=board.adde1(self.__grid,35,160)
-        self.__grid=board.adde1(self.__grid,35,165)
+        self.__grid=board.adde1(self.__grid,35,166)
         self.__grid=board.adde1(self.__grid,35,300)
-        #self.__grid=board.adde1(self.__grid,35,305)
         self.__grid=board.adde1(self.__grid,35,310)
+        self.__grid=board.adde1(self.__grid,35,424)
 
         #enemy2
         self.__grid=board.adde2(self.__grid,35,220)
         self.__grid=board.adde2(self.__grid,35,390)
-        self.__grid=board.adde2(self.__grid,35,425)
+        #self.__grid=board.adde2(self.__grid,35,425)
         self.__grid=board.adde2(self.__grid,35,529)
 
 
@@ -113,7 +115,6 @@ class mainscene_board:
             sys.stdout.write("\n")
 
         print()
-        print(a1,a2)
         global a
         print("TIME->",int(time.time()-a))
         print("LIFE->",life,"BULLET->",bullet)#bullet 1 means yes

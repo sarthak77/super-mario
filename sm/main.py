@@ -10,6 +10,7 @@ import termios
 
 #GLABAL VARIABLES
 quit=1
+i=0
 mariopresent=[33,7]
 marioprev=["-","-","-","-","-","-","-","-"]# 8 elements
 life=3
@@ -122,12 +123,26 @@ class screen(object):
         self.__board=mainscene_board()
 
 
+    def reset(self):
+        global mariopresent,marioprev,i,life,score,bullet
+
+        self.__board.clean(mariopresent,marioprev)
+        marioprev=["-","-","-","-","-","-","-","-"]
+        os.system('clear')
+        print("START AGAIN")
+        time.sleep(1)
+        mariopresent=[33,7]
+        i=0
+        bullet=0
+        os.system('clear')
+        self.__board.printboard(i,mariopresent[1],life,score,bullet)
+
+
     #main function
     def run(self):
         #initial values
         self.__board.printboard(0,7,3,0,0)
 
-        i=0#screen
         speed=2#do not change
         previnp="q"#for jumping
 
@@ -136,17 +151,7 @@ class screen(object):
             tty.setcbreak(sys.stdin.fileno())
             while(1):
 
-                global mariopresent
-                global marioprev
-                global life
-                global score
-                global a
-                global cjump
-                global bullet
-                global x
-                global y
-                global loop
-                global loop2
+                global mariopresent,marioprev,life,score,a,cjump,bullet,x,y,i,loop,loop2
 
                 #if won
                 if mariopresent==[33,609]:
@@ -253,17 +258,7 @@ class screen(object):
 
                             #if falls in river
                             if c2==-1:
-                                self.__board.clean(mariopresent,marioprev)
-                                marioprev=["-","-","-","-","-","-","-","-"]
-                                os.system('clear')
-                                print("START AGAIN")
-                                time.sleep(1)
-                                mariopresent=[33,7]
-                                i=0
-                                os.system('clear')
-                                self.__board.printboard(i,mariopresent[1],life,score,bullet)
-
-
+                                screen.reset(self)
 
                     #moving backward
                     if keyStroke=="a" and mariopresent[1]>i+6:
@@ -296,16 +291,7 @@ class screen(object):
 
                             #if dead
                             if c2==-1:
-                                self.__board.clean(mariopresent,marioprev)
-                                marioprev=["-","-","-","-","-","-","-","-"]
-                                os.system('clear')
-                                print("START AGAIN")
-                                time.sleep(1)
-                                mariopresent=[33,7]
-                                i=0
-                                os.system('clear')
-                                self.__board.printboard(i,mariopresent[1],life,score,bullet)
-
+                                screen.reset(self)
 
 
                     #jumps to height +10
@@ -345,7 +331,7 @@ class screen(object):
                         #moving right
                         if previnp=="d" and (mariopresent[1]+14)<(i+100):
 
-                            #4 units to right
+                            #16 units to right
                             timer=8
                             while(timer!=0):
                                 time.sleep(.01)
@@ -370,7 +356,7 @@ class screen(object):
                         #moving left
                         if previnp=="a" and (mariopresent[1]-14)>(i+6):
 
-                            #4 units to left
+                            #16 units to left
                             timer=8
                             while(timer!=0):
                                 time.sleep(.01)
@@ -504,21 +490,15 @@ class screen(object):
                         self.__board.updatemario(mariopresent[0],mariopresent[1])
                         self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
+                    elif self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1])=="Q":
+                        pass
+
                     else:
                         low=0
                         c2=checkrv(self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1),self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1))
                         life+=c2
                         if c2==-1:
-                            self.__board.clean(mariopresent,marioprev)
-                            marioprev=["-","-","-","-","-","-","-","-"]
-                            os.system('clear')
-                            print("START AGAIN")
-                            time.sleep(1)
-                            mariopresent=[33,7]
-                            i=0
-                            os.system('clear')
-                            self.__board.printboard(i,mariopresent[1],life,score,bullet)
-
+                           screen.reset(self)
                         
 
                 if 1:
@@ -542,9 +522,16 @@ class screen(object):
 
                     #check for flower
                     if marioprev[3]=='I':
+                        marioprev[3]="-"
                         bullet=1
 
-                    if time.time()-loop>1:
+                    #speed increase as mario progresses
+                    if mariopresent[1]>350:
+                        check=.7
+                    else:
+                        check=1
+
+                    if time.time()-loop>check:
                         loop=time.time()
                         #FOR ENEMY1                    
                         if len(x)!=0 and i+100>x[len(x)-1]>i:
@@ -575,7 +562,7 @@ class screen(object):
                             os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
                     
-                    if time.time()-loop2>.5:
+                    if time.time()-loop2>check-0.5:
                         loop2=time.time()
                         #FOR ENEMY2                    
                         if len(y)!=0 and i+100>y[len(y)-1]>i:
@@ -597,14 +584,8 @@ class screen(object):
                             os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
-                    #if all lives used up
-                    if life<=0:
-                        os.system('clear')
-                        print("GAME OVER   ALL LIVES USED")
-                        break
-
                     #kill enemy by jumping
-                    if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q":
+                    if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1])=="Q":
                         score+=10
                         if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q":
                             if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-2)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1])!="Q":#enemy2 check
@@ -612,50 +593,35 @@ class screen(object):
                             #if enemy2 then dead
                             else:
                                 life-=1
-                                self.__board.clean(mariopresent,marioprev)
-                                clean=[mariopresent,marioprev]
-                                marioprev=["-","-","-","-","-","-","-","-"]
-                                os.system('clear')
-                                print("START AGAIN")
-                                time.sleep(1)
-                                mariopresent=[33,7]
-                                i=0
-                                os.system('clear')
-                                self.__board.printboard(i,mariopresent[1],life,score,bullet)
-                                self.__board.clean(clean[0],clean[1])
+                                screen.reset(self)
 
-                        if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q":
+                        elif self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q":
                             if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+2)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1])!="Q":
                                 self.__board.cleane1a(mariopresent[1]+1,enemy1[x.index(mariopresent[1]+1),:])
                             #if enemy2 then dead
                             else:
                                 life-=1
-                                self.__board.clean(mariopresent,marioprev)
-                                clean=[mariopresent,marioprev]
-                                marioprev=["-","-","-","-","-","-","-","-"]
-                                os.system('clear')
-                                print("START AGAIN")
-                                time.sleep(1)
-                                mariopresent=[33,7]
-                                i=0
-                                os.system('clear')
-                                self.__board.printboard(i,mariopresent[1],life,score,bullet)
-                                self.__board.clean(clean[0],clean[1])
+                                screen.reset(self)
+
+                        else:
+                            if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)!="Q":
+                                self.__board.cleane1a(mariopresent[1],enemy1[x.index(mariopresent[1]),:])
+                            #if enemy2 then dead
+                            else:
+                                life-=1
+                                screen.reset(self)
 
                     #dead if in contact with enemy
                     if marioprev[6]=="x" or marioprev[7]=="x" or self.__board.getgrid(mariopresent[0]+1,mariopresent[1])=="Q" : 
+                        #not updating enemy prev so it shows dead location
                         life-=1
-                        self.__board.clean(mariopresent,marioprev)
-                        clean=[mariopresent,marioprev]
-                        marioprev=["-","-","-","-","-","-","-","-"]
+                        screen.reset(self)
+
+                    #if all lives used up
+                    if life<=0:
                         os.system('clear')
-                        print("START AGAIN")
-                        time.sleep(1)
-                        mariopresent=[33,7]
-                        i=0
-                        os.system('clear')
-                        self.__board.printboard(i,mariopresent[1],life,score,bullet)
-                        self.__board.clean(clean[0],clean[1])
+                        print("GAME OVER   ALL LIVES USED")
+                        break
 
 #----------------------------------------------------------------------------------------
 
