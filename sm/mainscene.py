@@ -126,7 +126,7 @@ class mainscene_board:
         if life<3:
             print("ENEMY1->",a1,"ENEMY2->",a2)
         #printing controls
-        print("d->right\na->left\nf->bullet\n\nsw->jump\ndw->rjump\naw->ljump\n\nctrl+c->quit")
+        print("d->right\na->left\nf->bullet\n\nsw->jump\ndw->rjump\naw->ljump\n\nq->quit")
        
 
 #---------------mario-------------------------------------

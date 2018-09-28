@@ -144,7 +144,7 @@ class screen(object):
         self.__board.printboard(0,7,3,0,0)
 
         speed=2#do not change
-        previnp="q"#for jumping
+        previnp="s"#for jumping
 
     
         try:
@@ -420,9 +420,11 @@ class screen(object):
 
                         previnp="w"
 
+                    if keyStroke=="q":
+                        break
                     #for straight jump
-                    if keyStroke not in ["a","w","d"]:
-                        previnp="q"
+                    if keyStroke not in ["a","w","d","q","f"]:
+                        previnp="s"
 
 #--------------------------------------------------------------------------------------
 
