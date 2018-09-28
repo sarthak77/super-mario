@@ -217,8 +217,9 @@ class screen(object):
                             if self.__board.getgrid(mariopresent[0]+1,mariopresent[1]+3*direction+b+direction)=="Q":
                                 if self.__board.getgrid(mariopresent[0]+1,mariopresent[1]+3*direction+b+2*direction)!="Q":#enemy2 cannot be killed
                                     self.__board.cleane1a(mariopresent[1]+3*direction+b+direction,enemy1[x.index(mariopresent[1]+3*direction+b+direction),:])#vanish
-                                    x[x.index(mariopresent[1]+3*direction+b+direction)]=-1#send back
-                                score+=20
+                                    #x[x.index(mariopresent[1]+3*direction+b+direction)]=-1#send back
+                                    x.remove(mariopresent[1]+3*direction+b+direction)#send back
+                                score+=10
 
                             #check if bullet can move forward
                             if checkj(self.__board.getgrid(mariopresent[0]+1,mariopresent[1]+3*direction+b+direction),self.__board.getgrid(mariopresent[0]+1,mariopresent[1]+3*direction+b+direction))==-1:
@@ -380,7 +381,7 @@ class screen(object):
                                 self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
                         #moving down
-                        timer=5
+                        timer=4
                         while(timer!=0 and djump==1):
 
                             #check if it can move down
@@ -443,7 +444,7 @@ class screen(object):
                     
                     #to move down
                     temp=["-","/"]
-                    if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1) in temp and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1) in temp:
+                    if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1) in temp and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1) in temp and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]) in temp:
 
                         #check for bullet power up
                         if mariopresent[0]==29 and mariopresent[1] in [51,215,216,217,218,219]:
@@ -490,8 +491,40 @@ class screen(object):
                         self.__board.updatemario(mariopresent[0],mariopresent[1])
                         self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
+                    #kill enemy by jumping
                     elif self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1])=="Q":
-                        pass
+                        low=1
+                        print("EFEFEF")
+                        score+=20
+                        if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q":
+                            if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-2)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1])!="Q":#enemy2 check
+                                self.__board.cleane1a(mariopresent[1]-1,enemy1[x.index(mariopresent[1]-1),:])
+                                #x[x.index(mariopresent[1]-1)]=-1#send back
+                                x.remove(mariopresent[1]-1)#send back
+                            #if enemy2 then dead
+                            else:
+                                life-=1
+                                screen.reset(self)
+
+                        elif self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q":
+                            if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+2)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1])!="Q":
+                                self.__board.cleane1a(mariopresent[1]+1,enemy1[x.index(mariopresent[1]+1),:])
+                                #x[x.index(mariopresent[1]+1)]=-1#send back
+                                x.remove(mariopresent[1]+1)#send back
+                            #if enemy2 then dead
+                            else:
+                                life-=1
+                                screen.reset(self)
+
+                        else:
+                            if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)!="Q":
+                                self.__board.cleane1a(mariopresent[1],enemy1[x.index(mariopresent[1]),:])
+                                #x[x.index(mariopresent[1])]=-1#send back
+                                x.remove(mariopresent[1])#send back
+                            #if enemy2 then dead
+                            else:
+                                life-=1
+                                screen.reset(self)
 
                     else:
                         low=0
@@ -502,7 +535,7 @@ class screen(object):
                         
 
                 if 1:
-                    
+
                     #FOR SCREEN 
                     if mariopresent[1]>(i+50):#position of mario at which screen moves
                         i+=20
@@ -583,33 +616,6 @@ class screen(object):
                             time.sleep(0.01)
                             os.system('clear')
                             self.__board.printboard(i,mariopresent[1],life,score,bullet)
-
-                    #kill enemy by jumping
-                    if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q" or self.__board.getgrid(mariopresent[0]+3,mariopresent[1])=="Q":
-                        score+=10
-                        if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q":
-                            if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-2)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1])!="Q":#enemy2 check
-                                self.__board.cleane1a(mariopresent[1]-1,enemy1[x.index(mariopresent[1]-1),:])
-                            #if enemy2 then dead
-                            else:
-                                life-=1
-                                screen.reset(self)
-
-                        elif self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q":
-                            if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+2)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1])!="Q":
-                                self.__board.cleane1a(mariopresent[1]+1,enemy1[x.index(mariopresent[1]+1),:])
-                            #if enemy2 then dead
-                            else:
-                                life-=1
-                                screen.reset(self)
-
-                        else:
-                            if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)!="Q":
-                                self.__board.cleane1a(mariopresent[1],enemy1[x.index(mariopresent[1]),:])
-                            #if enemy2 then dead
-                            else:
-                                life-=1
-                                screen.reset(self)
 
                     #dead if in contact with enemy
                     if marioprev[6]=="x" or marioprev[7]=="x" or self.__board.getgrid(mariopresent[0]+1,mariopresent[1])=="Q" : 
