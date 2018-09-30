@@ -155,13 +155,15 @@ class screen(object):
 
                 #if won
                 if mariopresent==[33,609]:
+                    os.system('aplay ./sounds/smb_stage_clear.wav')
                     #spawn fireworks 
                     for f in range(580,650,10):
                         self.__board.addfireworks(10,f)
                         os.system('clear')
                         self.__board.printboard(i,mariopresent[1],life,score,bullet)
                         #print(f)
-                        time.sleep(.5)
+                        os.system('aplay ./sounds/smb_fireworks.wav')
+                        #time.sleep(.5)
 
                     time.sleep(2)
                     os.system('clear')
@@ -194,6 +196,7 @@ class screen(object):
 
                     #for bullets
                     if keyStroke=="f" and bullet==1:
+                        os.system('aplay ./sounds/smb_fireball.wav')
 
                         #checking directions
                         direction=1#if no previnp
@@ -259,6 +262,7 @@ class screen(object):
 
                             #if falls in river
                             if c2==-1:
+                                os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
                     #moving backward
@@ -292,6 +296,7 @@ class screen(object):
 
                             #if dead
                             if c2==-1:
+                                os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
 
@@ -436,6 +441,7 @@ class screen(object):
 
                     #check for end flag
                     if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="M" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="M" and mariopresent[0]<25:
+                        os.system('aplay ./sounds/smb_flagpole.wav')
                         fi=20
                         while(fi!=33):
                             self.__board.moveflag(fi)
@@ -454,10 +460,11 @@ class screen(object):
                        
                         #coins
                         if self.__board.getgrid(mariopresent[0]-1,mariopresent[1])=="O":
+                            ts=score
                             score+=self.__board.jumpupc(mariopresent[0]-1,mariopresent[1])
                             #powerup check
                             p=0
-                            if self.__board.jumpupc(mariopresent[0]-1,mariopresent[1])==11:
+                            if score-ts==11:
                                 p=1
                             #time.sleep(0.1)
                             os.system('clear')
@@ -500,32 +507,38 @@ class screen(object):
                         score+=20
                         if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)=="Q":
                             if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-2)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1])!="Q":#enemy2 check
+                                os.system('aplay ./sounds/smb_stomp.wav')
                                 self.__board.cleane1a(mariopresent[1]-1,enemy1[x.index(mariopresent[1]-1),:])
                                 #x[x.index(mariopresent[1]-1)]=-1#send back
                                 x.remove(mariopresent[1]-1)#send back
                             #if enemy2 then dead
                             else:
                                 life-=1
+                                os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
                         elif self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)=="Q":
                             if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+2)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1])!="Q":
+                                os.system('aplay ./sounds/smb_stomp.wav')
                                 self.__board.cleane1a(mariopresent[1]+1,enemy1[x.index(mariopresent[1]+1),:])
                                 #x[x.index(mariopresent[1]+1)]=-1#send back
                                 x.remove(mariopresent[1]+1)#send back
                             #if enemy2 then dead
                             else:
                                 life-=1
+                                os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
                         else:
                             if self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1)!="Q" and self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1)!="Q":
+                                os.system('aplay ./sounds/smb_stomp.wav')
                                 self.__board.cleane1a(mariopresent[1],enemy1[x.index(mariopresent[1]),:])
                                 #x[x.index(mariopresent[1])]=-1#send back
                                 x.remove(mariopresent[1])#send back
                             #if enemy2 then dead
                             else:
                                 life-=1
+                                os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
                     else:
@@ -533,6 +546,7 @@ class screen(object):
                         c2=checkrv(self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1),self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1))
                         life+=c2
                         if c2==-1:
+                           os.system('aplay ./sounds/smb_mariodie.wav')
                            screen.reset(self)
                         
 
@@ -552,11 +566,13 @@ class screen(object):
 
                     #check for powerups
                     if self.__board.getgrid(mariopresent[0]+2,mariopresent[1])=="P":
+                        os.system('aplay ./sounds/smb_1-up.wav')
                         life+=1
                         self.__board.updatecell(mariopresent[0]+2,mariopresent[1],"-")
 
                     #check for flower
                     if marioprev[3]=='I':
+                        os.system('aplay ./sounds/smb_powerup.wav')
                         marioprev[3]="-"
                         bullet=1
 
@@ -623,11 +639,13 @@ class screen(object):
                     if marioprev[6]=="x" or marioprev[7]=="x" or self.__board.getgrid(mariopresent[0]+1,mariopresent[1])=="Q" : 
                         #not updating enemy prev so it shows dead location
                         life-=1
+                        os.system('aplay ./sounds/smb_mariodie.wav')
                         screen.reset(self)
 
                     #if all lives used up
                     if life<=0:
                         os.system('clear')
+                        os.system('aplay ./sounds/smb_gameover.wav')
                         print("GAME OVER   ALL LIVES USED")
                         break
 

@@ -272,14 +272,19 @@ class mainscene_board:
         self.__grid[x,y]="-"
         self.__grid[x-3,y]="O"
         if self.__grid[x-1,y].decode()=="?":
+            os.system('aplay ./sounds/smb_coin.wav')
             return(1)
         elif self.__grid[x-1,y].decode()=="C":
+            os.system('aplay ./sounds/smb_coin.wav')
             return(10)
         elif self.__grid[x-1,y].decode()=="$":
+            os.system('aplay ./sounds/smb_coin.wav')
             return(50)
         elif self.__grid[x-1,y].decode()=="P":
+            os.system('aplay ./sounds/smb_powerup_appears.wav')
             return(11)
         else:
+            os.system('aplay ./sounds/smb_bump.wav')
             return(0)
 
     #for "coin coming out" effect
