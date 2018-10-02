@@ -106,4 +106,23 @@
 │   ├── mainscene.cpython-36.pyc
 │   └── start.cpython-36.pyc
 ├── readme.md
+├── requirements.txt
+├── sounds
+│   ├── smb_1-up.wav
+│   ├── smb_bump.wav
+│   ├── smb_coin.wav
+│   ├── smb_fireball.wav
+│   ├── smb_fireworks.wav
+│   ├── smb_flagpole.wav
+│   ├── smb_gameover.wav
+│   ├── smb_jump-small.wav
+│   ├── smb_mariodie.wav
+│   ├── smb_powerup_appears.wav
+│   ├── smb_powerup.wav
+│   ├── smb_stage_clear.wav
+│   ├── smb_stomp.wav
+│   ├── smb_warning.wav
+│   └── smb_world_clear.wav
 └── start.py
+
+2 directories, 31 files
