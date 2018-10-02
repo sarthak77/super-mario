@@ -6,6 +6,8 @@ import random
 #do not change(change at your own risk)
 
 #this is my commit	
+#just a check
+#who are you
 dimy=40
 dimx=100
 
