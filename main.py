@@ -136,6 +136,7 @@ class screen(object):
         i=0
         bullet=0
         os.system('clear')
+        os.system('aplay ./sounds/background.wav&')
         self.__board.printboard(i,mariopresent[1],life,score,bullet)
 
 
@@ -156,6 +157,7 @@ class screen(object):
 
                 #if won
                 if mariopresent==[33,609]:
+                    os.system('pkill -kill aplay')
                     os.system('aplay ./sounds/smb_stage_clear.wav')
                     #spawn fireworks 
                     for f in range(580,650,10):
@@ -264,6 +266,7 @@ class screen(object):
 
                             #if falls in river
                             if c2==-1:
+                                os.system('pkill -kill aplay')
                                 os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
@@ -298,6 +301,7 @@ class screen(object):
 
                             #if dead
                             if c2==-1:
+                                os.system('pkill -kill aplay')
                                 os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
@@ -520,6 +524,7 @@ class screen(object):
                             #if enemy2 then dead
                             else:
                                 life-=1
+                                os.system('pkill -kill aplay')
                                 os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
@@ -532,6 +537,7 @@ class screen(object):
                             #if enemy2 then dead
                             else:
                                 life-=1
+                                os.system('pkill -kill aplay')
                                 os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
@@ -544,6 +550,7 @@ class screen(object):
                             #if enemy2 then dead
                             else:
                                 life-=1
+                                os.system('pkill -kill aplay')
                                 os.system('aplay ./sounds/smb_mariodie.wav')
                                 screen.reset(self)
 
@@ -552,8 +559,9 @@ class screen(object):
                         c2=checkrv(self.__board.getgrid(mariopresent[0]+3,mariopresent[1]-1),self.__board.getgrid(mariopresent[0]+3,mariopresent[1]+1))
                         life+=c2
                         if c2==-1:
-                           os.system('aplay ./sounds/smb_mariodie.wav')
-                           screen.reset(self)
+                            os.system('pkill -kill aplay')
+                            os.system('aplay ./sounds/smb_mariodie.wav')
+                            screen.reset(self)
                         
 
                 if 1:
@@ -645,12 +653,14 @@ class screen(object):
                     if marioprev[6]=="x" or marioprev[7]=="x" or self.__board.getgrid(mariopresent[0]+1,mariopresent[1])=="Q" : 
                         #not updating enemy prev so it shows dead location
                         life-=1
+                        os.system('pkill -kill aplay')
                         os.system('aplay ./sounds/smb_mariodie.wav')
                         screen.reset(self)
 
                     #if all lives used up
                     if life<=0:
                         os.system('clear')
+                        os.system('pkill -kill aplay')
                         print("GAME OVER   ALL LIVES USED")
                         os.system('aplay ./sounds/smb_gameover.wav')
                         break
@@ -666,5 +676,6 @@ if __name__=="__main__":
     x=start()
     x.run()
     if quit==0:
+        os.system('aplay ./sounds/background.wav&')
         x=screen()
         x.run()
