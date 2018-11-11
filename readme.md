@@ -1,6 +1,6 @@
 # Pythen terminal mario
 
-##Running the program
+## Running the program
 
 - Install requirements:
  - `pip install -r requirements.txt`
@@ -18,48 +18,48 @@
 - ctrl+c->to quit
 
 ## Required_Features
- # OO concepts
+ ### OO concepts
  - INHERITANCE:Objetcs are derived from `Object` class
  - POLYMORPHISM:To check movements of the enemy and mario
  - ENCAPSULATION:Class based approach to construct the game
  - ABSTRACTION:Private variables of the objects prevent any change from outside 
 
- #Movement
+ ### Movement
  - left,right,jump
  - gravity effect jump
  - jump on blocks pops them out
 
- #Obstacles
+ ### Obstacles
  - enemies move left,right,automatically
  - enemies with different speed
  - enemies chase the player
  - time,life,bullet,coins and coordinates of mario displayed
  - controls of the game displayed
- #Score
+ 
+ ### Score
  - time score
  - life score
  - coin score
  - enemy killing score
 
-
- #Background
+ ### Background
  - scenery changes when mario about to move out of the window
  - different scenes in the background containing clouds,mountains,tunnels,bridges,rivers,flags,walls etc
 
- #Bonus
+ ### Bonus
  - color using ANSI colour codes for terminal
  - sound
  - smart enemies which chase the player, move fast, invincible etc
 
-##Extra_Features
+## Extra_Features
 
-#Basic
+### Basic
 - additional start screen
 - shows prev dead location of mario
 - at the end mario enters into the castle and fireworks begin
 - score calculated at the end of the game
 
-#Enemies
+### Enemies
 - enemy2:
 - walk on water
 - walk faster
@@ -73,7 +73,7 @@
 - enemy2 and enemy1 can block each other
 - use enemies wisely to avoid being killed
 - 
-#Coins
+### Coins
 - generated randomly
 - 3 types
 - ? 1 points
@@ -81,19 +81,19 @@
 - $ 50 points
 - imaginary coin block
 
-#Power_ups
+### Power_ups
 - power ups go away if jumped again on same block
 - random power ups throughout the level
 - pop out on jumping
 
-#Imaginary_blocks
+### Imaginary_blocks
 - imaginary block at ycoor=75
 
-#Bullet
+### Bullet
 - pass through the flower slowly to get the bullet
 - once flower plucked its stem will disappear
 
-#Level
+### Level
 - speed of enemies increases as mario progresses
 
 ## file structure
