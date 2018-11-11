@@ -64,15 +64,13 @@
 - walk on water
 - walk faster
 - cannot kill by jumping(but will get points for it) or by firing
-
 - enemy1:
 - random follow
 - difficult to kill by jump
 - can be killed by bullet
-
 - enemy2 and enemy1 can block each other
 - use enemies wisely to avoid being killed
-- 
+
 ### Coins
 - generated randomly
 - 3 types
