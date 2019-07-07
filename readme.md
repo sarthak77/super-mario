@@ -1,5 +1,33 @@
 # Pythen terminal mario
 
+
+
+<div align='center'>
+<p align="center">
+ <img width="60%"src="https://github.com/sarthak77/super-mario/blob/master/imggal/Screenshot%20from%202019-07-07%2010-44-59.png">
+ </p>
+<p align="center">
+<img width="32%"src="https://github.com/sarthak77/super-mario/blob/master/imggal/Screenshot%20from%202019-07-07%2010-45-18.png">
+<img width="32%"src="https://github.com/sarthak77/super-mario/blob/master/imggal/Screenshot%20from%202019-07-07%2010-45-29.png">
+<img width="32%"src="https://github.com/sarthak77/super-mario/blob/master/imggal/Screenshot%20from%202019-07-07%2010-45-52.png">
+</p>
+ <p align="center">
+<img width="32%"src="https://github.com/sarthak77/super-mario/blob/master/imggal/Screenshot%20from%202019-07-07%2010-46-04.png">
+<img width="32%"src="https://github.com/sarthak77/super-mario/blob/master/imggal/Screenshot%20from%202019-07-07%2010-46-08.png">
+</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 ## Running the program
 
 - Install requirements:
