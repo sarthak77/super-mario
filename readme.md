@@ -96,43 +96,43 @@
 
 ## file structure
 
-.
-├── board.py
-├── color.py
-├── func.py
-├── main.py
-├── mainscene.py
-├── __pycache__
-│   ├── board.cpython-36.pyc
-│   ├── color.cpython-36.pyc
-│   ├── func.cpython-36.pyc
-│   ├── infoscreen.cpython-36.pyc
-│   ├── inputeg.cpython-36.pyc
-│   ├── main.cpython-36.pyc
-│   ├── mainscene.cpython-36.pyc
-│   └── start.cpython-36.pyc
-├── readme.md
-├── requirements.txt
-├── sounds
-│   ├── background.wav
-│   ├── smb_1-up.wav
-│   ├── smb_bump.wav
-│   ├── smb_coin.wav
-│   ├── smb_fireball.wav
-│   ├── smb_fireworks.wav
-│   ├── smb_flagpole.wav
-│   ├── smb_gameover.wav
-│   ├── smb_jump-small.wav
-│   ├── smb_jump-super.wav
-│   ├── smb_kick.wav
-│   ├── smb_mariodie.wav
-│   ├── smb_powerup_appears.wav
-│   ├── smb_powerup.wav
-│   ├── smb_stage_clear.wav
-│   ├── smb_stomp.wav
-│   ├── smb_vine.wav
-│   ├── smb_warning.wav
-│   └── smb_world_clear.wav
-└── start.py
+<br>.
+<br>├── board.py
+<br>├── color.py
+<br>├── func.py
+<br>├── main.py
+<br>├── mainscene.py
+<br>├── __pycache__
+<br>│   ├── board.cpython-36.pyc
+<br>│   ├── color.cpython-36.pyc
+<br>│   ├── func.cpython-36.pyc
+<br>│   ├── infoscreen.cpython-36.pyc
+<br>│   ├── inputeg.cpython-36.pyc
+<br>│   ├── main.cpython-36.pyc
+<br>│   ├── mainscene.cpython-36.pyc
+<br>│   └── start.cpython-36.pyc
+<br>├── readme.md
+<br>├── requirements.txt
+<br>├── sounds
+<br>│   ├── background.wav
+<br>│   ├── smb_1-up.wav
+<br>│   ├── smb_bump.wav
+<br>│   ├── smb_coin.wav
+<br>│   ├── smb_fireball.wav
+<br>│   ├── smb_fireworks.wav
+<br>│   ├── smb_flagpole.wav
+<br>│   ├── smb_gameover.wav
+<br>│   ├── smb_jump-small.wav
+<br>│   ├── smb_jump-super.wav
+<br>│   ├── smb_kick.wav
+<br>│   ├── smb_mariodie.wav
+<br>│   ├── smb_powerup_appears.wav
+<br>│   ├── smb_powerup.wav
+<br>│   ├── smb_stage_clear.wav
+<br>│   ├── smb_stomp.wav
+<br>│   ├── smb_vine.wav
+<br>│   ├── smb_warning.wav
+<br>│   └── smb_world_clear.wav
+<br>└── start.py
 
 2 directories, 35 files
